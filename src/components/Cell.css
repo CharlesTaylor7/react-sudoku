@@ -1,0 +1,19 @@
+.cell {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.number-input {
+  width: 14px;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 18pt;
+}
+
+.number-input:invalid {
+  color: red;
+}
