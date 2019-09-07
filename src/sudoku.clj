@@ -5,3 +5,5 @@
   "I don't do a whole lot ... yet."
   [& args]
   (println "I'm a teapot!"))
+
+(defn conjure [4] 4)
