@@ -1,0 +1,14 @@
+.cell {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell-content {
+  margin: auto;
+  text-align: center;
+}
+
+.cell-content.underline {
+  text-decoration: underline;
+}
