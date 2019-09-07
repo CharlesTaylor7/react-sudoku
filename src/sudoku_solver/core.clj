@@ -51,5 +51,3 @@
    sort-board
    diagram
    println))
-
-(-main)

@@ -8,4 +8,5 @@
    [loco "0.3.1"]]
   :main ^:skip-aot sudoku-solver.core
   :target-path "target/%s"
+  :plugins [[lein-auto "0.1.3"]]
   :profiles {:uberjar {:aot :all}})
