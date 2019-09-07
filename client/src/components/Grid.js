@@ -3,24 +3,15 @@ import "./Grid.css"
 
 export const Grid = () => {
   return (
-    <div className="root grid">
-      {Array(9)
+    <div className="grid">
+      {Array(81)
         .fill()
         .map((_, i) =>
           <div
-            className="grid"
-            key={`grid-${i}`}
-          >
-            {Array(9)
-            .fill()
-            .map((_, j) =>
-              <div
-                key={`cell-${i}-${j}`}
-                id={`cell-${i}-${j}`}
-                className="cell"
-              />)
-            }
-          </div>)
+            className="cell"
+            key={`cell-${i}`}
+            id={`cell-${i}`}
+          />)
       }
     </div>
   )
