@@ -3,9 +3,8 @@
   (:use loco.core loco.constraints)
   (:require [clojure.string :refer [join]]))
 
-(defn sudoku-model
+(def sudoku-model
   "A blank sudoku model"
-  []
   (let [vars (for [i (range 9)
                    j (range 9)]
                ($in [:cell i j] 1 9))
@@ -28,8 +27,8 @@
   ([x] (tap identity x))
   ([f x] (println (f x)) x))
 
-(defn pretty-print
-  "Pretty print a sudoku board"
+(defn diagram
+  "Get a string diagram of the sudoku board"
   [board]
   (->>
    board
@@ -47,11 +46,10 @@
 (defn -main
   []
   (->>
-   (sudoku-model)
-   solutions
-   first
+   sudoku-model
+   solution
    sort-board
-   pretty-print
+   diagram
    println))
 
 (-main)
