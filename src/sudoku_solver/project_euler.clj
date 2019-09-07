@@ -28,13 +28,11 @@
            ($= [:cell i j] value)))
        (concat sudoku-model)
        solution
-       (fn 
+       (fn
            ; Upper left corner 3 digit number
-         [{h [:cell 0 0] t [:cell 0 1] o [:cell 0 2]}] 
+         [{hun [:cell 0 0] ten [:cell 0 1] one [:cell 0 2]}] 
            ; Convert digits to number using Horner's rule 
-         (+ o (* 10 (+ t (* 10 h)))))
-       )))
-   tap
+         (+ one (* 10 (+ ten (* 10 hun))))))))
    (reduce +)))
 
 (soln)
