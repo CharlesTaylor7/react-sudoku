@@ -1,30 +1,24 @@
 import React, {useState, useRef} from "react"
 import "./Cell.css"
-// import NumericInput from "react-numeric-input"
-import NumberInput from "react-number-input"
 
 export const Cell = () => {
   const [value, setValue] = useState();
-
-  const changeValue = (val) => {
-    if (val) {
-      const num = Number(val[0]);
-      setValue(num);
-    }
-    else {
-      setValue("");
-    }
-  };
+  const [inEditMode, setInEditMode] = useState(false);
+  const inputElement = useRef(null);
 
   return (
-    <div className="cell">
-      <NumberInput
-        className="number-input"
-        min={1}
-        max={9}
-        value={value}
+    <div
+      className="cell"
+      onClick={() => inputElement.current.focus()}
+    >
+      <input
+        className="number-input underline"
+        type="text"
+        ref={inputElement}
         placeholder="_"
-        onChange={e => console.log(e)}
+        onChange={e => setValue(e.target.value)}
+        onFocus={() => setInEditMode(true)}
+        onBlur={() => setInEditMode(false)}
       />
     </div>
   )

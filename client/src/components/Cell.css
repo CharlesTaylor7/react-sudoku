@@ -1,27 +1,27 @@
 .cell {
   border: 1px solid white;
-  display: table-cell;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .cell-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: col;
   justify-content: space-evenly;
   margin: auto;
   text-align: center;
 }
 
-.cell-content.underline {
+.underline {
   text-decoration: underline;
 }
 
 .number-input {
-  width: 10px;
-  /* height: 100%; */
-
-  /* padding: 45%; */
+  width: 14px;
   background: none;
   border: none;
   outline: none;
+  color: white;
+  font-size: 18pt;
 }
