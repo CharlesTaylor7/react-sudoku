@@ -1,14 +1,27 @@
 .cell {
   border: 1px solid white;
-  display: flex;
+  display: table-cell;
   flex-direction: column;
 }
 
 .cell-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   margin: auto;
   text-align: center;
 }
 
 .cell-content.underline {
   text-decoration: underline;
+}
+
+.input {
+  width: 10px;
+  /* height: 100%; */
+
+  /* padding: 45%; */
+  background: none;
+  border: none;
+  outline: none;
 }

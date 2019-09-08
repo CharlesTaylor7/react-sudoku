@@ -1,22 +1,29 @@
-import React, {useState} from "react"
+import React, {useState, useRef} from "react"
 import "./Cell.css"
 
 export const Cell = () => {
-
   const [value, setValue] = useState();
+  const inputElement = useRef(null);
+
   const changeValue = (val) => {
-    if (!Number.isInteger(val) || val < 1 || val > 9) {
-      throw new Error("Cell value must be an integer between 1 & 9.")
+    if (val) {
+      const num = Number(val[0]);
+      setValue(num);
     }
-    setValue(val)
+    else {
+      setValue("");
+    }
   };
 
   return (
-    <div className="cell">
-      <span
-        className="cell-content underline">
-        {value ? value : ""}
-      </span>
+    <div
+      className="cell"
+      onClick={() => inputElement.current.focus() }>
+      <input
+        className="input"
+        type="text"
+        ref={inputElement}
+        onChange={e => changeValue(e.target.value)} />
     </div>
   )
 }
