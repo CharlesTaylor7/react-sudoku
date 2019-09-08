@@ -12,8 +12,10 @@ export const Cell = () => {
       onClick={() => inputElement.current.focus()}
     >
       <input
-        className="number-input underline"
+        className="number-input"
         type="text"
+        pattern="[1-9]"
+        maxLength="1"
         ref={inputElement}
         placeholder="_"
         onChange={e => setValue(e.target.value)}

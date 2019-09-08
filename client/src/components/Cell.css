@@ -5,23 +5,16 @@
   justify-content: center;
 }
 
-.cell-content {
-  display: flex;
-  flex-direction: col;
-  justify-content: space-evenly;
-  margin: auto;
-  text-align: center;
-}
-
-.underline {
-  text-decoration: underline;
-}
-
 .number-input {
   width: 14px;
+  text-decoration: underline;
   background: none;
   border: none;
   outline: none;
   color: white;
   font-size: 18pt;
+}
+
+.number-input:invalid {
+  color: red;
 }
