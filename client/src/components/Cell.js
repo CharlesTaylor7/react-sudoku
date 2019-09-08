@@ -1,9 +1,10 @@
 import React, {useState, useRef} from "react"
 import "./Cell.css"
+// import NumericInput from "react-numeric-input"
+import NumberInput from "react-number-input"
 
 export const Cell = () => {
   const [value, setValue] = useState();
-  const inputElement = useRef(null);
 
   const changeValue = (val) => {
     if (val) {
@@ -16,14 +17,15 @@ export const Cell = () => {
   };
 
   return (
-    <div
-      className="cell"
-      onClick={() => inputElement.current.focus() }>
-      <input
-        className="input"
-        type="text"
-        ref={inputElement}
-        onChange={e => changeValue(e.target.value)} />
+    <div className="cell">
+      <NumberInput
+        className="number-input"
+        min={1}
+        max={9}
+        value={value}
+        placeholder="_"
+        onChange={e => console.log(e)}
+      />
     </div>
   )
 }

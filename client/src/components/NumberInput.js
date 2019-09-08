@@ -1,4 +1,6 @@
-class NumberField extends React.Component {
+import React from "react"
+import "./NumberInput.css"
+export class NumberInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isEditing: false };
@@ -14,26 +16,16 @@ class NumberField extends React.Component {
 
   render() {
     return (
-      <div>
-        <label htmlFor={this.props.name}>Income</label>
-        {this.state.isEditing ? (
-          <input
-            type="number"
-            name={this.props.name}
-            value={this.props.value}
-            onChange={this.onChange.bind(this)}
-            onBlur={this.toggleEditing.bind(this)}
-          />
-        ) : (
-          <input
-            type="text"
-            name={this.props.name}
-            value={this.props.value}
-            onFocus={this.toggleEditing.bind(this)}
-            readOnly
-          />
-        )}
-      </div>
+      <input
+          className="number static"
+          type="text"
+          name={this.props.name}
+          value={this.props.value}
+          onBlur={this.toggleEditing.bind(this)}
+          onFocus={this.toggleEditing.bind(this)}
+          onChange={this.onChange.bind(this)}
+          readOnly={this.props.isEditing}
+      />
     );
   }
 }

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-number-input": "^15.5.1",
+    "react-numeric-input": "^2.2.3"
+  }
+}
