@@ -1,30 +1,12 @@
 (ns sudoku-solver.project-euler
   (:gen-class)
-  (:use loco.core loco.constraints)
+  (:use loco.core loco.constraints sudoku-solver.lib)
   (:require
-   [clojure.string :refer [join split-lines]]
-   [sudoku-solver.core :refer [sudoku-model tap]]
-   [clojure.spec.alpha :refer [int-in-range?]]))
+   [clojure.string :refer [join split-lines]]))
 
 (defn indexed
   [coll]
   (map-indexed (fn [k v] [k v]) coll))
-
-(defn my-assert
-  "Assert a predicate on x. Throws an exception if the assertion failed, otherwise returns x."
-  [x pred message]
-  (if (pred x) 
-    x 
-    (throw (.Exception message))))
-
-(defn char->digit
-  "Parse character to digit"
-  [char]
-  (-> 
-   char
-   int
-   (- 48)
-   (my-assert #(int-in-range? 0 10 %) "character should be a digit")))
 
 (defn board->constraints
   "Go from the ten lines making up a board to a list of cell constraints."
@@ -33,7 +15,7 @@
         [j char] (indexed row)
         :let [value (char->digit char)]
         :when (> value 0)]
-    ($= [:cell i j] value)))
+    ($= (cell i j) value)))
 
 (defn extract-number
   "Get 3 digit number from upper left corner of board"

@@ -1,53 +1,28 @@
 (ns sudoku-solver.core
-  (:gen-class)
-  (:use loco.core loco.constraints)
-  (:require [clojure.string :refer [join]]))
+  (:require
+   [sudoku-solver.lib :as sudoku]
+   [org.httpkit.server :as server]
+   [compojure.core :refer :all]
+   [compojure.route :as route]
+   [ring.middleware.defaults :refer :all]
+   [clojure.pprint :as pp]
+   [clojure.string :as str]
+   [clojure.data.json :as json])
+  (:gen-class))
 
-(def sudoku-model
-  "A blank sudoku model"
-  (let [vars (for [i (range 9)
-                   j (range 9)]
-               ($in [:cell i j] 1 9))
-        rows (for [i (range 9)]
-               ($distinct (for [j (range 9)] [:cell i j])))
-        cols (for [j (range 9)]
-               ($distinct (for [i (range 9)] [:cell i j])))
-        boxes (for [i (range 3) j (range 3)]
-                ($distinct
-                 (for [x (range 3) y (range 3)]
-                   [:cell (+ x (* 3 i)) (+ y (* 3 j))])))]
-    (concat vars rows cols boxes)))
+(defn sudoku-solutions
+  "Return all solutions to a partially filled in sudoku board." 
+  [{ query :params}]
+  {:status  200
+   :headers {"Content-Type" "application/json"}
+   :body    (json/write-str (sudoku/solve query))})
 
-(defn sort-board
-  [board]
-  (sort-by (fn [[[_ i j] v]] (+ j (* 9 i))) board))
-
-(defn tap
-  "Prints the value, and returns it"
-  ([x] (tap identity x))
-  ([f x] (println (f x)) x))
-
-(defn diagram
-  "Get a string diagram of the sudoku board"
-  [board]
-  (->>
-   board
-   (map second)
-   (partition 9)
-   (map (fn [row] (->>
-                   row 
-                   (partition 3)
-                   (map #(join " " %))
-                   (join "|"))))
-   (partition 3)
-   (map (fn [cols] (join "\n" cols)))
-   (join "\n-----------------\n")))
+(defroutes app-routes
+  (GET "/" [] sudoku-solutions)
+  (route/not-found "Error, page not found!"))
 
 (defn -main
-  []
-  (->>
-   sudoku-model
-   solution
-   sort-board
-   diagram
-   println))
+  [& args]
+  (let [port (Integer/parseInt (or (System/getenv "PORT") "3001"))]
+    (server/run-server (wrap-defaults #'app-routes site-defaults) {:port port})
+    (println (str "Running webserver at http:/127.0.0.1:" port "/"))))
